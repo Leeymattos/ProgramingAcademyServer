@@ -1,5 +1,5 @@
 import { IsNotEmpty } from "class-validator"
-import { Column, Entity, Index, ObjectID, ObjectIdColumn, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity({ name: 'tb_videos' })
 export class Video {

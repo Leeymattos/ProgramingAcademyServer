@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Delete, ParseUUIDPipe } from "@nestjs/common";
+import { DeleteResult } from "typeorm";
 import { VideoService } from "src/videos/services/videos.service";
 import { Video } from "src/videos/entities/video.entity";
-import { DeleteResult } from "typeorm";
 
 @Controller('/videos')
 export class VideoController {

@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { Entity, Column, ObjectIdColumn, ObjectID, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 
 @Entity({ name: 'tb_usuarios' })
