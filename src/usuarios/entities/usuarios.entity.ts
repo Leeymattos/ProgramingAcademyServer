@@ -1,22 +1,23 @@
-import { IsNotEmpty } from 'class-validator';
-import { Entity, Column, ObjectIdColumn, ObjectID } from 'typeorm'
+import { IsEmail, IsNotEmpty } from 'class-validator';
+import { Entity, Column, ObjectIdColumn, ObjectID, PrimaryGeneratedColumn } from 'typeorm'
 
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
 
-    @ObjectIdColumn()
-    _id: ObjectID
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @IsNotEmpty()
-    @Column({ length: 150, nullable: false })
+    @Column({ length: 255, nullable: false })
     name: string;
 
     @IsNotEmpty()
-    @Column({ length: 200, nullable: false })
+    @IsEmail()
+    @Column({ length: 255, nullable: false })
     email: string;
 
     @IsNotEmpty()
-    @Column({ length: 20, nullable: false })
+    @Column({ length: 255, nullable: false })
     passsword: string;
 }

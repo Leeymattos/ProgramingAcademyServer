@@ -1,5 +1,5 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Delete } from "@nestjs/common";
-import { VideoService } from "src/services/videos.service";
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Delete, ParseUUIDPipe } from "@nestjs/common";
+import { VideoService } from "src/videos/services/videos.service";
 import { Video } from "src/videos/entities/video.entity";
 import { DeleteResult } from "typeorm";
 
@@ -24,7 +24,7 @@ export class VideoController {
 
     @Get('/:id')
     @HttpCode(HttpStatus.OK)
-    callFindById(@Param('id') id: string): Promise<Video> {
+    callFindById(@Param('id', ParseUUIDPipe) id: string): Promise<Video> {
         return this.videoService.findById(id);
     }
 
@@ -42,7 +42,7 @@ export class VideoController {
 
     @Delete('/:id')
     @HttpCode(HttpStatus.OK)
-    callDelete(@Param('id') id: string): Promise<DeleteResult> {
+    callDelete(@Param('id', ParseUUIDPipe) id: string): Promise<DeleteResult> {
         return this.videoService.delete(id);
     }
 

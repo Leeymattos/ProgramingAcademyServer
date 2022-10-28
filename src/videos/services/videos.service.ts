@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ObjectId } from "mongodb";
 import { Video } from "src/videos/entities/video.entity";
 import { DeleteResult, ILike, MongoRepository } from "typeorm";
 
@@ -22,9 +21,7 @@ export class VideoService {
 
     async findById(id: string): Promise<Video> {
 
-        const video = await this.videoRepository.findOneBy({
-            _id: new ObjectId(id)
-        })
+        const video = await this.videoRepository.findOneBy({ id })
 
         if (!video) {
             throw new HttpException('Video não encontrado!', HttpStatus.NOT_FOUND);
@@ -47,9 +44,9 @@ export class VideoService {
     async update(video: Video): Promise<Video> {
 
 
-        const videoExists = await this.findById(String(video._id));
+        const videoExists = await this.findById(String(video.id));
 
-        if (!videoExists || !video._id) {
+        if (!videoExists || !video.id) {
             throw new HttpException('', HttpStatus.NOT_FOUND);
         }
 

@@ -1,22 +1,21 @@
 import { IsNotEmpty } from "class-validator"
-import { Column, Entity, Index, ObjectID, ObjectIdColumn } from "typeorm"
+import { Column, Entity, Index, ObjectID, ObjectIdColumn, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity({ name: 'tb_videos' })
 export class Video {
 
-    @ObjectIdColumn()
-    _id: ObjectID
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
-    @Index({ fulltext: true })
     @IsNotEmpty()
-    @Column({ length: 150, nullable: false })
+    @Column({ length: 255, nullable: false })
     title: string
 
     @IsNotEmpty()
-    @Column({ length: 350, nullable: false })
+    @Column({ length: 500, nullable: false })
     description: string
 
     @IsNotEmpty()
-    @Column({ length: 350, nullable: false })
+    @Column({ length: 50, nullable: false })
     url: string
 }
