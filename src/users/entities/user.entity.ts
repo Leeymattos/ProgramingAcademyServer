@@ -2,8 +2,8 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 
-@Entity({ name: 'tb_usuarios' })
-export class Usuario {
+@Entity({ name: 'tb_users' })
+export class User {
 
     @PrimaryGeneratedColumn('uuid')
     id: string

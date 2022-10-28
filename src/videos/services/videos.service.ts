@@ -1,14 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Video } from "src/videos/entities/video.entity";
-import { DeleteResult, ILike, MongoRepository } from "typeorm";
+import { DeleteResult, ILike, Repository } from "typeorm";
 
 @Injectable()
 export class VideoService {
 
     constructor(
         @InjectRepository(Video)
-        private videoRepository: MongoRepository<Video>
+        private videoRepository: Repository<Video>
     ) { }
 
     async create(video: Video): Promise<Video> {

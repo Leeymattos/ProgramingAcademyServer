@@ -12,38 +12,38 @@ export class VideoController {
 
     @Post()
     @HttpCode(HttpStatus.OK)
-    callCreate(@Body() video: Video): Promise<Video> {
-        return this.videoService.create(video);
+    async callCreate(@Body() video: Video): Promise<Video> {
+        return await this.videoService.create(video);
     }
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    callFindAll(): Promise<Video[]> {
-        return this.videoService.findAll();
+    async callFindAll(): Promise<Video[]> {
+        return await this.videoService.findAll();
     }
 
     @Get('/:id')
     @HttpCode(HttpStatus.OK)
-    callFindById(@Param('id', ParseUUIDPipe) id: string): Promise<Video> {
-        return this.videoService.findById(id);
+    async callFindById(@Param('id', ParseUUIDPipe) id: string): Promise<Video> {
+        return await this.videoService.findById(id);
     }
 
     @Get('/title/:title')
     @HttpCode(HttpStatus.OK)
-    callFindByTitle(@Param('title') title: string): Promise<Video[]> {
-        return this.videoService.findByTitle(title);
+    async callFindByTitle(@Param('title') title: string): Promise<Video[]> {
+        return await this.videoService.findByTitle(title);
     }
 
     @Put()
     @HttpCode(HttpStatus.OK)
-    callUpdate(@Body() video: Video): Promise<Video> {
-        return this.videoService.update(video);
+    async callUpdate(@Body() video: Video): Promise<Video> {
+        return await this.videoService.update(video);
     }
 
     @Delete('/:id')
     @HttpCode(HttpStatus.OK)
-    callDelete(@Param('id', ParseUUIDPipe) id: string): Promise<DeleteResult> {
-        return this.videoService.delete(id);
+    async callDelete(@Param('id', ParseUUIDPipe) id: string): Promise<DeleteResult> {
+        return await this.videoService.delete(id);
     }
 
 }
