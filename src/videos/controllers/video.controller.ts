@@ -3,7 +3,7 @@ import { DeleteResult } from "typeorm";
 import { VideoService } from "src/videos/services/videos.service";
 import { Video } from "src/videos/entities/video.entity";
 
-@Controller('/videos')
+@Controller('/video')
 export class VideoController {
 
     constructor(
