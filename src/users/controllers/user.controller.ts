@@ -1,4 +1,5 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { User } from "../entities/user.entity";
 import { UserService } from "../services/user.service";
 
@@ -9,6 +10,7 @@ export class UserController {
         private readonly userService: UserService
     ) { }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get()
     @HttpCode(HttpStatus.OK)
     async callFindAll(): Promise<User[]> {
@@ -21,6 +23,7 @@ export class UserController {
         return await this.userService.create(user);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Put()
     @HttpCode(HttpStatus.OK)
     async callUpdate(@Body() user: User): Promise<User> {

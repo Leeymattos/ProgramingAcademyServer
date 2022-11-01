@@ -1,8 +1,10 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Delete, ParseUUIDPipe } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Delete, ParseUUIDPipe, UseGuards } from "@nestjs/common";
 import { DeleteResult } from "typeorm";
 import { VideoService } from "src/videos/services/videos.service";
 import { Video } from "src/videos/entities/video.entity";
+import { AuthGuard } from "@nestjs/passport";
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('/video')
 export class VideoController {
 

@@ -7,6 +7,7 @@ import { UserModule } from "src/users/user.module";
 import { Bcrypt } from "./bcrypt/bcrypt";
 import { AuthController } from "./controllers/auth.controller";
 import { AuthService } from "./services/auth.service";
+import { JwtStrategy } from "./strategies/jwt.strategy";
 import { LocalStrategy } from "./strategies/local.strategy";
 
 @Module({
@@ -20,7 +21,7 @@ import { LocalStrategy } from "./strategies/local.strategy";
         })
     ],
     controllers: [AuthController],
-    providers: [Bcrypt, AuthService, UserService, LocalStrategy],
+    providers: [Bcrypt, AuthService, UserService, LocalStrategy, JwtStrategy],
     exports: []
 })
 export class AuthModule { }
