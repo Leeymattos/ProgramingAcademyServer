@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config'
 import { VideoModule } from './videos/video.module';
+import { UserModule } from './users/user.module';
+import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -15,6 +18,8 @@ import { VideoModule } from './videos/video.module';
       synchronize: true
     }),
     VideoModule,
+    UserModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],

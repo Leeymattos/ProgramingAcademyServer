@@ -1,12 +1,14 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
-import { Bcrypt } from "src/auth/bcrypt/bcrypt";
+import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { Bcrypt } from "../../auth/bcrypt/bcrypt";
 import { User } from "../entities/user.entity";
 
 @Injectable()
 export class UserService {
 
     constructor(
+        @InjectRepository(User)
         private userRepository: Repository<User>,
         private bcrypt: Bcrypt
     ) { }
@@ -24,9 +26,9 @@ export class UserService {
 
         if (!userFound) {
             if (user.id) {
-                delete (user.id)
+                delete (user.id);
             }
-            user.passsword = await this.bcrypt.hashPassword(user.passsword);
+            user.password = await this.bcrypt.hashPassword(user.password);
             return await this.userRepository.save(user);
         }
 
@@ -46,7 +48,7 @@ export class UserService {
             throw new HttpException('Email informado já existe!', HttpStatus.BAD_REQUEST);
         }
 
-        user.passsword = await this.bcrypt.hashPassword(user.passsword)
+        user.password = await this.bcrypt.hashPassword(user.password)
         return await this.userRepository.save(user);
 
         //falar sobre a falta de segurança
