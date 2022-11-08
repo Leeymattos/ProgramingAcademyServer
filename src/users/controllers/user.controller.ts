@@ -1,5 +1,7 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put, Req, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { Request } from "express";
+import { IResponseJwtStrategy } from "src/interfaces/IResponseJwtStrategy";
 import { User } from "../entities/user.entity";
 import { UserService } from "../services/user.service";
 
@@ -26,8 +28,8 @@ export class UserController {
     @UseGuards(AuthGuard('jwt'))
     @Put()
     @HttpCode(HttpStatus.OK)
-    async callUpdate(@Body() user: User): Promise<User> {
-        return await this.userService.update(user);
+    async callUpdate(@Req() req: Request) {
+        return await this.userService.update(req.body, req.user as IResponseJwtStrategy);
     }
 
 }
