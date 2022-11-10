@@ -43,6 +43,14 @@ export class VideoService {
         });
     }
 
+    async findByPlaylist(playlistId: string): Promise<Video[]> {
+        return await this.videoRepository.find({
+            where: {
+                id: playlistId
+            }
+        });
+    }
+
     async update(video: Video): Promise<Video> {
 
 

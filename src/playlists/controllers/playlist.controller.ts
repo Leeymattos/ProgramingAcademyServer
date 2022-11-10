@@ -1,7 +1,12 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post, Put, UseGuards } from "@nestjs/common";
+import { Roles } from "src/auth/decorators/role.decorator";
+import { Role } from "src/auth/enums/role.enum";
+import { JwtAuthGuard } from "src/auth/guards/jwt.guard";
+import { RolesGuard } from "src/auth/guards/roles.guard";
 import { Playlist } from "../entities/playlist";
 import { PlaylistService } from "../services/playlist.service";
 
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('/playlist')
 export class playlistController {
     constructor(
@@ -9,24 +14,28 @@ export class playlistController {
     ) { }
 
     @Post()
+    @Roles(Role.Admin)
     @HttpCode(HttpStatus.CREATED)
     async callCreate(@Body() playlist: Playlist): Promise<Playlist> {
         return await this.playlistService.create(playlist);
     }
 
     @Get()
+    @Roles(Role.User)
     @HttpCode(HttpStatus.OK)
     async callFindAll(): Promise<Playlist[]> {
         return await this.playlistService.findAll();
     }
 
     @Put()
+    @Roles(Role.Admin)
     @HttpCode(HttpStatus.OK)
     async callUpdate(@Body() playlist: Playlist): Promise<Playlist> {
         return await this.playlistService.update(playlist);
     }
 
     @Delete('/:id')
+    @Roles(Role.Admin)
     @HttpCode(HttpStatus.NO_CONTENT)
     async callDelete(@Param('id', ParseUUIDPipe) id: string) {
         return await this.playlistService.delete(id)

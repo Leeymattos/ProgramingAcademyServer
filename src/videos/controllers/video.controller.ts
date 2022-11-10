@@ -43,6 +43,13 @@ export class VideoController {
         return await this.videoService.findByTitle(title);
     }
 
+    @Get('/playlist/:id')
+    @Roles(Role.User)
+    @HttpCode(HttpStatus.OK)
+    async callFindByPlaylist(@Param('id', ParseUUIDPipe) playlistId: string) {
+        return await this.videoService.findByPlaylist(playlistId);
+    }
+
     @Put()
     @Roles(Role.Admin)
     @HttpCode(HttpStatus.OK)
