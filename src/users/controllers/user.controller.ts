@@ -1,7 +1,9 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put, Req, UseGuards } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
 import { Request } from "express";
-import { IResponseJwtStrategy } from "src/interfaces/IResponseJwtStrategy";
+import { JwtAuthGuard } from "src/auth/guards/jwt.guard";
+import { Roles } from "../../auth/decorators/role.decorator";
+import { Role } from "../../auth/enums/role.enum";
+import { IResponseJwtStrategy } from "../../interfaces/IResponseJwtStrategy";
 import { User } from "../entities/user.entity";
 import { UserService } from "../services/user.service";
 
@@ -12,7 +14,8 @@ export class UserController {
         private readonly userService: UserService
     ) { }
 
-    @UseGuards(AuthGuard('jwt'))
+    @UseGuards(JwtAuthGuard)
+    @Roles(Role.Admin)
     @Get()
     @HttpCode(HttpStatus.OK)
     async callFindAll(): Promise<User[]> {
@@ -25,7 +28,8 @@ export class UserController {
         return await this.userService.create(user);
     }
 
-    @UseGuards(AuthGuard('jwt'))
+    @UseGuards(JwtAuthGuard)
+    @Roles(Role.User)
     @Put()
     @HttpCode(HttpStatus.OK)
     async callUpdate(@Req() req: Request) {

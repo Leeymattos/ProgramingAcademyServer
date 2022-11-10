@@ -32,8 +32,6 @@ export class VideoService {
 
     async findByTitle(title: string): Promise<Video[]> {
 
-        console.log(title);
-
         return await this.videoRepository.find({
             where: {
                 title: ILike(`%${title}%`)

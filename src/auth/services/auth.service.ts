@@ -1,11 +1,9 @@
 import { Injectable } from "@nestjs/common/decorators";
 import { JwtService } from "@nestjs/jwt";
-import { Request } from 'express'
-import { IAthenticatedUser } from "src/interfaces/IAuthenticatedUser";
-import { ITrafficableUSer } from "src/interfaces/ITrafficableUser";
-import { UserService } from "src/users/services/user.service";
+import { IAthenticatedUser } from "../../interfaces/IAuthenticatedUser";
+import { ITrafficableUSer } from "../../interfaces/ITrafficableUser";
+import { UserService } from "../../users/services/user.service";
 import { Bcrypt } from "../bcrypt/bcrypt";
-
 
 @Injectable()
 export class AuthService {
@@ -37,7 +35,8 @@ export class AuthService {
 
         const payload = {
             sub: user.id,
-            name: user.name
+            name: user.name,
+            role: user.role
         }
 
         return {

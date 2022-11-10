@@ -4,6 +4,8 @@ import { ConfigModule } from '@nestjs/config'
 import { VideoModule } from './videos/video.module';
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/guards/roles.guard';
 
 @Module({
   imports: [

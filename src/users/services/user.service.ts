@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { IResponseJwtStrategy } from "src/interfaces/IResponseJwtStrategy";
 import { Repository } from "typeorm";
+import { IResponseJwtStrategy } from "../../interfaces/IResponseJwtStrategy";
 import { Bcrypt } from "../../auth/bcrypt/bcrypt";
 import { User } from "../entities/user.entity";
 
