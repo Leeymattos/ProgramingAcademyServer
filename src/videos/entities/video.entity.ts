@@ -1,5 +1,6 @@
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import { IsNotEmpty, MaxLength, MinLength } from "class-validator"
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Playlist } from "../../playlists/entities/playlist"
 
 @Entity({ name: 'tb_videos' })
 export class Video {
@@ -24,6 +25,11 @@ export class Video {
     @MaxLength(50)
     @Column({ length: 50, nullable: false })
     url: string
+
+    @ManyToOne(() => Playlist, playlist => playlist.video, {
+        onDelete: 'CASCADE'
+    })
+    playlist: Playlist
 
     @CreateDateColumn()
     createdAt: Date

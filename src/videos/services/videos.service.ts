@@ -16,7 +16,11 @@ export class VideoService {
     }
 
     async findAll(): Promise<Video[]> {
-        return await this.videoRepository.find();
+        return await this.videoRepository.find({
+            relations: {
+
+            }
+        });
     }
 
     async findById(id: string): Promise<Video> {
@@ -42,10 +46,10 @@ export class VideoService {
     async update(video: Video): Promise<Video> {
 
 
-        const videoExists = await this.findById(String(video.id));
+        const videoExists = await this.findById(video.id);
 
         if (!videoExists || !video.id) {
-            throw new HttpException('', HttpStatus.NOT_FOUND);
+            throw new HttpException('Video não encontrado!', HttpStatus.NOT_FOUND);
         }
 
         return await this.videoRepository.save(video);

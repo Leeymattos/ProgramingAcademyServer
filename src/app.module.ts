@@ -6,6 +6,10 @@ import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/guards/roles.guard';
+import { PlaylistModule } from './playlists/playlist.module';
+import { Video } from './videos/entities/video.entity';
+import { Playlist } from './playlists/entities/playlist';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -16,7 +20,7 @@ import { RolesGuard } from './auth/guards/roles.guard';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [__dirname + '/**/*.entity{.js,.ts}'],
+      entities: [Video, Playlist, User],
       synchronize: true
     }),
     /*  TypeOrmModule.forRoot({
@@ -32,6 +36,7 @@ import { RolesGuard } from './auth/guards/roles.guard';
      }), */
     VideoModule,
     UserModule,
+    PlaylistModule,
     AuthModule
   ],
   controllers: [],

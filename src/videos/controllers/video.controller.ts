@@ -17,7 +17,7 @@ export class VideoController {
 
     @Post()
     @Roles(Role.Admin)
-    @HttpCode(HttpStatus.OK)
+    @HttpCode(HttpStatus.CREATED)
     async callCreate(@Body() video: Video): Promise<Video> {
         return await this.videoService.create(video);
     }
@@ -52,7 +52,7 @@ export class VideoController {
 
     @Delete('/:id')
     @Roles(Role.Admin)
-    @HttpCode(HttpStatus.OK)
+    @HttpCode(HttpStatus.NO_CONTENT)
     async callDelete(@Param('id', ParseUUIDPipe) id: string): Promise<DeleteResult> {
         return await this.videoService.delete(id);
     }
