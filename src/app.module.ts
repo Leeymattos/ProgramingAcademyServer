@@ -10,6 +10,7 @@ import { PlaylistModule } from './playlists/playlist.module';
 import { Video } from './videos/entities/video.entity';
 import { Playlist } from './playlists/entities/playlist';
 import { User } from './users/entities/user.entity';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -39,7 +40,7 @@ import { User } from './users/entities/user.entity';
     PlaylistModule,
     AuthModule
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule { }

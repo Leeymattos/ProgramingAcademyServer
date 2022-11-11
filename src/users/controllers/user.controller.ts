@@ -1,12 +1,14 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put, Req, UseGuards } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Request } from "express";
-import { JwtAuthGuard } from "src/auth/guards/jwt.guard";
+import { JwtAuthGuard } from "../../auth/guards/jwt.guard";
 import { Roles } from "../../auth/decorators/role.decorator";
 import { Role } from "../../auth/enums/role.enum";
 import { IResponseJwtStrategy } from "../../interfaces/IResponseJwtStrategy";
 import { User } from "../entities/user.entity";
 import { UserService } from "../services/user.service";
 
+@ApiTags('User')
 @Controller('/user')
 export class UserController {
 
@@ -14,6 +16,7 @@ export class UserController {
         private readonly userService: UserService
     ) { }
 
+    @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @Roles(Role.Admin)
     @Get()
@@ -28,8 +31,8 @@ export class UserController {
         return await this.userService.create(user);
     }
 
+    @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.User)
     @Put()
     @HttpCode(HttpStatus.OK)
     async callUpdate(@Req() req: Request) {

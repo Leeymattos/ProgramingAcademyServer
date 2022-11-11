@@ -1,4 +1,5 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Delete, ParseUUIDPipe, UseGuards } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { DeleteResult } from "typeorm";
 import { VideoService } from "../../videos/services/videos.service";
 import { Video } from "../../videos/entities/video.entity";
@@ -7,6 +8,8 @@ import { Role } from "../../auth/enums/role.enum";
 import { RolesGuard } from "../../auth/guards/roles.guard";
 import { JwtAuthGuard } from "../../auth/guards/jwt.guard";
 
+@ApiBearerAuth()
+@ApiTags('Video')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('/video')
 export class VideoController {
