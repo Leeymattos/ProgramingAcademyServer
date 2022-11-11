@@ -23,11 +23,7 @@ export class RolesGuard implements CanActivate {
         const req = context.switchToHttp().getRequest();
         const user: IResponseJwtStrategy = req.user;
 
-        console.table(user)
-
         return requiredRoles.some(role => user.role?.includes(role))
-
-        //  return requiredRoles.some((role) => user.roles?.includes(role));
 
     }
 }

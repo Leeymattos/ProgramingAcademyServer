@@ -26,8 +26,9 @@ export class UserService {
         const userFound = await this.findByEmail(user.email);
 
         if (!userFound) {
-            if (user.id) {
+            if (user.id || user.role) {
                 delete (user.id);
+                delete (user.role);
             }
             user.password = await this.bcrypt.hashPassword(user.password);
             return await this.userRepository.save(user);
@@ -38,6 +39,7 @@ export class UserService {
 
     async update(user: User, userValidate: IResponseJwtStrategy) {
         user.id = userValidate.id
+        user.role = userValidate.role
 
         const userFound = await this.userRepository.findOneBy({ id: user.id });
 

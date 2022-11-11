@@ -7,6 +7,7 @@ import { Role } from "../../auth/enums/role.enum";
 import { IResponseJwtStrategy } from "../../interfaces/IResponseJwtStrategy";
 import { User } from "../entities/user.entity";
 import { UserService } from "../services/user.service";
+import { RolesGuard } from "../../auth/guards/roles.guard";
 
 @ApiTags('User')
 @Controller('/user')
@@ -17,7 +18,7 @@ export class UserController {
     ) { }
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(Role.Admin)
     @Get()
     @HttpCode(HttpStatus.OK)
@@ -32,7 +33,7 @@ export class UserController {
     }
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Put()
     @HttpCode(HttpStatus.OK)
     async callUpdate(@Req() req: Request) {
