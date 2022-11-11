@@ -24,7 +24,6 @@ export class playlistController {
     }
 
     @Get()
-    @Roles(Role.User)
     @HttpCode(HttpStatus.OK)
     async callFindAll(): Promise<Playlist[]> {
         return await this.playlistService.findAll();

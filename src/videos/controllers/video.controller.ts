@@ -26,28 +26,24 @@ export class VideoController {
     }
 
     @Get()
-    @Roles(Role.User)
     @HttpCode(HttpStatus.OK)
     async callFindAll(): Promise<Video[]> {
         return await this.videoService.findAll();
     }
 
     @Get('/:id')
-    @Roles(Role.User)
     @HttpCode(HttpStatus.OK)
     async callFindById(@Param('id', ParseUUIDPipe) id: string): Promise<Video> {
         return await this.videoService.findById(id);
     }
 
     @Get('/title/:title')
-    @Roles(Role.User)
     @HttpCode(HttpStatus.OK)
     async callFindByTitle(@Param('title') title: string): Promise<Video[]> {
         return await this.videoService.findByTitle(title);
     }
 
     @Get('/playlist/:id')
-    @Roles(Role.User)
     @HttpCode(HttpStatus.OK)
     async callFindByPlaylist(@Param('id', ParseUUIDPipe) playlistId: string) {
         return await this.videoService.findByPlaylist(playlistId);
