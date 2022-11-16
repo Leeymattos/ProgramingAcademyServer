@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { PlaylistService } from "src/playlists/services/playlist.service";
 import { DeleteResult, ILike, Repository } from "typeorm";
 import { Video } from "../entities/video.entity";
 
@@ -8,10 +9,17 @@ export class VideoService {
 
     constructor(
         @InjectRepository(Video)
-        private videoRepository: Repository<Video>
+        private videoRepository: Repository<Video>,
+        private playlistService: PlaylistService
     ) { }
 
     async create(video: Video): Promise<Video> {
+        if (!video.playlist || !video.playlist.id) {
+            throw new HttpException('Categoria não encontrada!', HttpStatus.BAD_REQUEST)
+        }
+
+        await this.playlistService.findById(video.playlist.id);
+
         return await this.videoRepository.save(video);
     }
 

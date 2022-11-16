@@ -14,6 +14,17 @@ export class PlaylistService {
         return await this.playlistRepository.find();
     }
 
+    async findById(id: string) {
+        const playlist = this.playlistRepository.findOneBy({ id });
+
+
+        if (!playlist) {
+            throw new HttpException('Playlist não encontrada!', HttpStatus.BAD_REQUEST);
+        }
+
+        return playlist;
+    }
+
     async create(playlist: Playlist): Promise<Playlist> {
         return await this.playlistRepository.save(playlist);
     }
