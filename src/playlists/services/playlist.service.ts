@@ -14,7 +14,7 @@ export class PlaylistService {
         return await this.playlistRepository.find();
     }
 
-    async findById(id: string) {
+    async findById(id: string): Promise<Playlist> {
         const playlist = this.playlistRepository.findOneBy({ id });
 
 
