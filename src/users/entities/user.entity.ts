@@ -18,6 +18,13 @@ export class User {
     name: string;
 
     @IsNotEmpty()
+    @MinLength(2)
+    @MaxLength(500)
+    @ApiProperty()
+    @Column({ length: 500, nullable: false })
+    githubUrl: string;
+
+    @IsNotEmpty()
     @IsEmail()
     @MaxLength(255)
     @ApiProperty()

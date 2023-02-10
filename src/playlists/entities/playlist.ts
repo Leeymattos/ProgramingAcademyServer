@@ -15,6 +15,13 @@ export class Playlist {
     @Column({ length: 255, nullable: false })
     name: string
 
+    @IsNotEmpty()
+    @MaxLength(255)
+    @ApiProperty()
+    @Column({ length: 255, nullable: false })
+    description: string
+
+
     @ApiProperty()
     @OneToMany(() => Video, video => video.playlist)
     video: Video[]

@@ -4,7 +4,8 @@ export interface ITrafficableUSer {
     id: string
     name: string;
     email: string;
-    createdAt: Date
-    updatedAt: Date
+    githubUrl: string;
+    createdAt: Date;
+    updatedAt: Date;
     role: Role
 }
